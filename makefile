@@ -13,14 +13,18 @@ BIBTEX := bibtex
 # Etc.
 OBJS   := $(wildcard **/*.tex) $(wildcard *.tex)
 
+ifdef BIBREF
+	BIBREF := $(BIBREF).bib
+endif
+
 # Rules
 .PHONY: clean clean-pdf all
 
 all: $(TARGETS)
 
-$(BRIEF).pdf:  $(BRIEF).tex
+$(BRIEF).pdf: $(BRIEF).tex $(BIBREF)
 
-%.pdf: %.tex
+%.pdf: %.tex $(BIBREF)
 	$(LATEX) --shell-escape $(basename $@)
 ifdef BIBREF
 	$(BIBTEX) $(basename $@)
