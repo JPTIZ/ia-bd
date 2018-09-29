@@ -5,6 +5,7 @@
 % Packages
 \usepackage{amsmath}
 \usepackage[portuguese]{babel}
+\usepackage{hyperref}
 
 %-------------------------------------------------------------------------------
 % User-commands
@@ -47,6 +48,25 @@
         exemplos \underline{no seu domínio} e descreva as inferências.
 
         \begin{solution}
+            \begin{description}
+                \item [\texttt{subClassOf}:] Dadas duas classes A e B e
+                    individuos que pertençam a apenas uma delas. Ao se fazer
+                    \texttt{subClassOf(:A :B)}, se está indicando que todo
+                    elemento pertencente a A também pertence a B, \textbf{mas o
+                    contrário não necessariamente}. Sendo assim, se os
+                    elementos ${1, 2, 3}$ pertencerem a A e ${4, 5, 6}$ a B,
+                    \texttt{subClassOf(:A :B)} fará com que os indivíduos que
+                    pertencem a A e B sejam, respectivamente, ${1, 2, 3}$ e
+                    ${1, 2, 3, 4, 5, 6}$;
+                \item [\texttt{equivalentTo}:] Dadas duas classes A e B e
+                    indivíduos que pertençam a apenas uma delas. Ao se fazer
+                    \texttt{equivalentTo}, se está indicando que todo elemento
+                    pertencente a A também pertence a B, \textbf{e vice-versa}.
+                    Sendo assim, se os elementos ${1, 2, 3}$ pertencerem a A e
+                    ${4, 5, 6}$ a B, \texttt{equivalentTo(:A :B)} fará com que
+                    tanto A quanto B sejam compostas pelos indivíduos ${1, 2,
+                    3, 4, 5, 6}$.
+            \end{description}
         \end{solution}
 
         \question{}
@@ -58,4 +78,15 @@
         \begin{solution}
         \end{solution}
     \end{questions}
+
+    \bibliographystyle{unsrt}
+    \bibliography{refs}
+    \nocite{*}
 \end{document}
+
+
+% A class axiom may contain (multiple) owl:equivalentClass statements.
+% owl:equivalentClass is a built-in property that links a class description to
+% another class description. The meaning of such a class axiom is that the two
+% class descriptions involved have the same class extension (i.e., both class
+% extensions contain exactly the same set of individuals).

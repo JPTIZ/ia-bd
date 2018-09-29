@@ -1,5 +1,6 @@
 # Project configs
 BRIEF  := report
+BIBREF := refs
 
 TARGETS := $(BRIEF).pdf
 
