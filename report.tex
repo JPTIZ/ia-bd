@@ -6,11 +6,20 @@
 \usepackage{amsmath}
 \usepackage[portuguese]{babel}
 \usepackage{hyperref}
+\usepackage{environ}
 \usepackage{xcolor}
 
 %-------------------------------------------------------------------------------
 % User-commands
 \newcommand{\todo}[1]{{\color{red}{#1}}}
+
+\NewEnviron{superframe}{%
+    \begin{center}
+        \fbox{\setlength{\fboxsep}{1em}\fbox{\parbox{5.5in}{%
+            \BODY{}
+        }}}
+    \end{center}
+}
 
 %-------------------------------------------------------------------------------
 % Project configs
@@ -31,21 +40,34 @@
         \end{itemize}
     }
 
-    \begin{center}
-        \fbox{\setlength{\fboxsep}{1em}\fbox{\parbox{5.5in}{%
-            \textbf{Observações:}
+    \section{Geral}
 
-            \begin{itemize}
-                \item O resultado da parte 1 deve ser um pequeno texto
-                    explicando o \textbf{entendimento} de vocês sobre os
-                    tópicos sugeridos. Portanto, o texto deve ter \textbf{no
-                    máximo} 2 páginas;
-                \item Citar todas as fontes utilizadas para a pesquisa
-                    (Wikipédia também serve).
-            \end{itemize}
-        }}}
-    \end{center}
+    \begin{superframe}
+        \begin{itemize}
+            \item Será necessário entregar com a parte 1 e uma breve descrição
+                do domínio escolhido, bem como das principais classes e
+                propriedades definidas, ontologias importadas (quando
+                aplicável), e testes realizados com os indivíduos (o que foi
+                inferido a partir da terminologia);
 
+            \item Além disso, o arquivo RDF/OWL com o modelo conceitual.
+        \end{itemize}
+    \end{superframe}
+
+    \section{Parte 1: Pesquisa Teórica}
+
+    \begin{superframe}
+        \textbf{Observações:}
+
+        \begin{itemize}
+            \item O resultado da parte 1 deve ser um pequeno texto
+                explicando o \textbf{entendimento} de vocês sobre os
+                tópicos sugeridos. Portanto, o texto deve ter \textbf{no
+                máximo} 2 páginas;
+            \item Citar todas as fontes utilizadas para a pesquisa
+                (Wikipédia também serve).
+        \end{itemize}
+    \end{superframe}
 
     \begin{questions}
         \question{}
@@ -91,6 +113,36 @@
 
         \begin{solution}
         \end{solution}
+    \end{questions}
+
+    \section{Parte 2: Prática}
+    \begin{questions}
+        \question{}
+        Desenvolver um modelo conceitual (ontologia de domínio) utilizando
+        OWL\@.
+
+        Construam uma representação de domínio (utilizando \emph{classes},
+        \emph{relações} e \emph{indivíduos}) de alguma área de interesse
+        (pesquisa em computação, temas dos TCCs, filmes, esportes, músicas,
+        hobbies, etc.).
+
+        \begin{superframe}
+            \begin{itemize}
+                \item A avaliação considera principalmente a utilização dos
+                    axiomas de propriedades e de classes. Quanto mais
+                    restrições forem modeladas, melhor;
+
+                \item Dentre as restrições, utilize no mínimo alguma de
+                    cardinalidade qualificada (\texttt{min}, \texttt{max},
+                    \ldots) em alguma propriedade de objeto (ver na
+                    documentação da OWL, disponível no Moodle);
+
+                \item Outro aspecto importante é a definição dos membros das
+                    classes. Utilizem suas definições para testar a definição
+                    dos axiomas e também para testar o funcionamento do
+                    mecanismo de inferência da linguagem.
+            \end{itemize}
+        \end{superframe}
     \end{questions}
 
     \bibliographystyle{unsrt}
