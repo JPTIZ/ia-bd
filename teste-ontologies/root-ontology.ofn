@@ -1,0 +1,36 @@
+Prefix(:=<http://webprotege.stanford.edu/project/7x3YDpY5no0EKHhYQ6wCs4#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://webprotege.stanford.edu/project/7x3YDpY5no0EKHhYQ6wCs4>
+
+Declaration(Class(<http://webprotege.stanford.edu/R9aQBlBuxNphsEsvOfaC5B9>))
+Declaration(Class(<http://webprotege.stanford.edu/RDSZfjE0x8wq6ilyeCQDHqx>))
+Declaration(Class(<http://webprotege.stanford.edu/RfjUwkeUnHctnO1n7HpSCJ>))
+
+
+############################
+#   Classes
+############################
+
+# Class: <http://webprotege.stanford.edu/R9aQBlBuxNphsEsvOfaC5B9> (Person)
+
+AnnotationAssertion(rdfs:label <http://webprotege.stanford.edu/R9aQBlBuxNphsEsvOfaC5B9> "Person")
+SubClassOf(<http://webprotege.stanford.edu/R9aQBlBuxNphsEsvOfaC5B9> owl:Thing)
+
+# Class: <http://webprotege.stanford.edu/RDSZfjE0x8wq6ilyeCQDHqx> (Professor)
+
+AnnotationAssertion(rdfs:label <http://webprotege.stanford.edu/RDSZfjE0x8wq6ilyeCQDHqx> "Professor")
+SubClassOf(<http://webprotege.stanford.edu/RDSZfjE0x8wq6ilyeCQDHqx> <http://webprotege.stanford.edu/R9aQBlBuxNphsEsvOfaC5B9>)
+
+# Class: <http://webprotege.stanford.edu/RfjUwkeUnHctnO1n7HpSCJ> (Student)
+
+AnnotationAssertion(rdfs:label <http://webprotege.stanford.edu/RfjUwkeUnHctnO1n7HpSCJ> "Student")
+SubClassOf(<http://webprotege.stanford.edu/RfjUwkeUnHctnO1n7HpSCJ> <http://webprotege.stanford.edu/R9aQBlBuxNphsEsvOfaC5B9>)
+
+
+)
