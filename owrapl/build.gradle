@@ -1,0 +1,16 @@
+apply plugin: 'application'
+
+mainClassName = 'owrapl.OwlReader'
+group = 'owrapl'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+
+    compile 'net.sourceforge.owlapi:owlapi-distribution:4.2.8'
+}
