@@ -1,6 +1,6 @@
 apply plugin: 'application'
 
-mainClassName = 'owrapl.OwlReader'
+mainClassName = 'owrapl.Owrapl'
 group = 'owrapl'
 version = '1.0-SNAPSHOT'
 

@@ -1,66 +1,107 @@
 package owrapl;
 
 import java.io.File;
+import java.io.OutputStream;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.formats.FunctionalSyntaxDocumentFormat;
 import org.semanticweb.owlapi.io.OWLOntologyInputSourceException;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLException;
+import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+import org.semanticweb.owlapi.reasoner.NodeSet;
+import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
+import org.semanticweb.owlapi.util.InferredOntologyGenerator;
 
 public class OwlReader {
-    public OWLOntology ontologyFromFile(String filename) {
+    private OwlReader() {
+        ontology = newOntology();
+        reasoner = reasonerFactory.createReasoner(ontology);
+    }
+
+    public static OwlReader fromFile(String filename) {
+        var reader = new OwlReader();
+
+        reader.ontology = reader.ontologyFromFile(filename);
+
+        return reader;
+    }
+
+    public void infer() {
+        var inferred = new InferredOntologyGenerator(reasoner);
+
+        inferred.fillOntology(
+            manager.getOWLDataFactory(),
+            ontology
+        );
+    }
+
+    public String prefix() {
+        return ontology.getOntologyID().getOntologyIRI().get().toString();
+    }
+
+    public boolean consistent() {
+        reasoner.precomputeInferences();
+
+        return reasoner.isConsistent();
+    }
+
+    public NodeSet<OWLClass> subclasses(String root) {
+        var dataFactory = manager.getOWLDataFactory();
+        var rootClass = dataFactory.getOWLClass(
+            IRI.create(prefix() + "#" + root)
+        );
+        System.out.printf("Looking for subclasses of %s\n", prefix() + "#" + root);
+        return reasoner.getSubClasses(rootClass, true);
+    }
+
+    public void save(OutputStream stream) {
+        try {
+            ontology.saveOntology(
+                new FunctionalSyntaxDocumentFormat(),
+                System.out
+            );
+        } catch (OWLOntologyStorageException e) {
+            throw new Exceptions.FailedToSave(e.getMessage());
+        }
+    }
+
+    private OWLOntology ontologyFromFile(String filename) {
         var file = new File(filename);
         try {
             return manager.loadOntologyFromOntologyDocument(file);
         } catch (OWLOntologyCreationException e) {
-            throw new Exceptions.CreationError();
+            throw new Exceptions.CreationError(e.getMessage());
         } catch (OWLOntologyInputSourceException e) {
             throw new Exceptions.FileNotFound(filename);
         }
     }
 
-    OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+    /*
+    private OWLOntology ontologyFromIRI(String iriString) {
+        var iri = IRI.create(iriString);
 
-    public static void showUsage() {
-        var executable = "OwlReader";
-        try {
-            executable = new File(
-                OwlReader.class
-                    .getProtectionDomain()
-                    .getCodeSource()
-                    .getLocation()
-                    .toURI()
-                    .getPath()
-                ).toString();
-        } catch (Exception e) {}
-        System.out.printf(
-            "Usage: %s <input owl file>" +
-            "\n", executable
-        );
+        return manager.loadOntologyFromOntologyDocument
     }
+    */
 
-    // Yes, I'm a pokemon trainer and I gotta catch'em all.
-    public static void main(String[] args) throws OWLException {
-        if (args.length == 0) {
-            showUsage();
-            return;
-        }
-
+    private OWLOntology newOntology() {
         try {
-            var input = args[0];
-            var reader = new OwlReader();
-            var ontology = reader.ontologyFromFile(input);
-            ontology.saveOntology(new FunctionalSyntaxDocumentFormat(), System.out);
-        } catch (Exception e) {
-            System.err.println(
-                "----------------------------------------\n" +
-                "[ERROR] " + e.getMessage() + "\n" +
-                "----------------------------------------"
-            );
+            return manager.createOntology();
+        } catch (OWLOntologyCreationException e) {
+            throw new Exceptions.CreationError(e.getMessage());
         }
     }
+
+    private OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+    private OWLReasonerFactory reasonerFactory =
+        new StructuralReasonerFactory();
+
+    private OWLOntology ontology;
+    private OWLReasoner reasoner;
 }

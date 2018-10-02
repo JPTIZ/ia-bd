@@ -1,0 +1,11 @@
+Prefix(:=<http://www.example.com/ontology1#>)
+
+Ontology(<http://www.example.com/ontology1>
+    Annotation(rdfs:label "Example of Ontology")
+
+    Declaration(Class(:Person))
+    Declaration(Class(:Student))
+    Declaration(NamedIndividual(:Martin))
+    ClassAssertion(:Student :Martin)
+    SubClassOf(:Student :Person)
+)
