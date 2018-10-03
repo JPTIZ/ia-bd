@@ -1,6 +1,10 @@
 package owrapl;
 
+import static java.lang.System.out;
+
 import java.io.File;
+import java.io.PrintStream;
+import java.io.OutputStream;
 
 import org.semanticweb.owlapi.model.OWLException;
 
@@ -11,30 +15,39 @@ public class Owrapl {
             showUsage();
             return;
         }
+        var input = args[0];
 
         try {
-            var input = args[0];
+            printf("Loading %s...", input);
+            disableErr();
             var reader = OwlReader.fromFile(input);
-            // reader = OwlReader.fromIRI("https://protege.stanford.edu/ontologies/pizza/pizza.owl");
+            enableErr();
+            println("Done.");
 
-            System.out.println("----------------------------------------\n\n");
+            println("----------------------------------------\n\n");
 
-            reader.infer();
+            // reader.infer();
 
-            System.out.println("Prefix: " + reader.prefix());
+            println("Prefix: " + reader.prefix());
 
-            System.out.println(
+            println(
                 "Consistent? " + (reader.consistent() ? "Yes" : "No")
             );
 
             var subperson = reader.subclasses("Person");
-            System.out.printf(
+            printf(
                 "Subclasses of Person: %s (empty: %b)\n", subperson, subperson.isEmpty()
             );
 
-            reader.save(System.out);
+            var langs = reader.individualsFromClass("<http://webprotege.stanford.edu/RDmsQnYD1AMUV6qXn98JI1z>");
+            printf("Languages: ");
+            for (var lang: langs) {
+                println(lang);
+            }
 
-            System.out.println("\n\n----------------------------------------");
+            // reader.save(System.out);
+
+            println("\n\n----------------------------------------");
         } catch (Exception e) {
             System.err.println(
                 "----------------------------------------\n" +
@@ -56,9 +69,34 @@ public class Owrapl {
                     .getPath()
                 ).toString();
         } catch (Exception e) {}
-        System.out.printf(
+        printf(
             "Usage: %s <input owl file>" +
             "\n", executable
         );
     }
+
+    private static void printf(String format, Object... args) {
+        out.printf(format, args);
+    }
+
+    private static <T> void println(T obj) {
+        out.println(obj);
+    }
+
+    private static void println() {
+        out.println();
+    }
+
+    private static void disableErr() {
+        err = System.err;
+        System.setErr(new PrintStream(new OutputStream() {
+            public void write(int b) {}
+        }));
+    }
+
+    private static void enableErr() {
+        System.setErr(err);
+    }
+
+    private static PrintStream err = System.err;
 }

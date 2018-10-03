@@ -8,6 +8,7 @@ import org.semanticweb.owlapi.formats.FunctionalSyntaxDocumentFormat;
 import org.semanticweb.owlapi.io.OWLOntologyInputSourceException;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -58,6 +59,16 @@ public class OwlReader {
         );
         System.out.printf("Looking for subclasses of %s\n", prefix() + "#" + root);
         return reasoner.getSubClasses(rootClass, true);
+    }
+
+    public NodeSet<OWLNamedIndividual> individualsFromClass(String classname) {
+        var classiri = IRI.create(classname); //IRI.create(prefix() + "#" + classname);
+
+        System.out.println("Looking for individuals from class " + classiri);
+
+        var dataFactory = manager.getOWLDataFactory();
+        var _class = dataFactory.getOWLClass(classiri);
+        return reasoner.getInstances(_class, false);
     }
 
     public void save(OutputStream stream) {
