@@ -1,0 +1,81 @@
+Prefix(:=<http://webprotege.stanford.edu/project/uz1OuMK1wyBDNcHK6amK2#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://webprotege.stanford.edu/project/uz1OuMK1wyBDNcHK6amK2>
+
+Declaration(Class(<http://webprotege.stanford.edu/RBfzKvInDnQzn8kksVHidCd>))
+Declaration(Class(<http://webprotege.stanford.edu/RDmsQnYD1AMUV6qXn98JI1z>))
+Declaration(NamedIndividual(<http://webprotege.stanford.edu/R8eDjRz5ofn3mAHQkSTmlRa>))
+Declaration(NamedIndividual(<http://webprotege.stanford.edu/R9lTmUKy5tdfHZ4IQbi9K37>))
+Declaration(NamedIndividual(<http://webprotege.stanford.edu/RBu6RplOe9GFNUhL2EwtoZ1>))
+Declaration(NamedIndividual(<http://webprotege.stanford.edu/RCDaPJRFH9wax6Odrlc3Q24>))
+Declaration(NamedIndividual(<http://webprotege.stanford.edu/RCKSjrmMTctP0Lxhar7b4oz>))
+Declaration(NamedIndividual(<http://webprotege.stanford.edu/RCUw7BvL107L1Sta4bwCQiG>))
+Declaration(NamedIndividual(<http://webprotege.stanford.edu/RbtiuT2wNe3tVjsU3oy1Xh>))
+Declaration(NamedIndividual(<http://webprotege.stanford.edu/Rzw1PgodLqTUcIiY6Iv5JR>))
+
+
+############################
+#   Classes
+############################
+
+# Class: <http://webprotege.stanford.edu/RBfzKvInDnQzn8kksVHidCd> (Implementation)
+
+AnnotationAssertion(rdfs:label <http://webprotege.stanford.edu/RBfzKvInDnQzn8kksVHidCd> "Implementation")
+
+# Class: <http://webprotege.stanford.edu/RDmsQnYD1AMUV6qXn98JI1z> (Language)
+
+AnnotationAssertion(rdfs:label <http://webprotege.stanford.edu/RDmsQnYD1AMUV6qXn98JI1z> "Language")
+
+
+############################
+#   Named Individuals
+############################
+
+# Individual: <http://webprotege.stanford.edu/R8eDjRz5ofn3mAHQkSTmlRa> (PyPy)
+
+AnnotationAssertion(rdfs:label <http://webprotege.stanford.edu/R8eDjRz5ofn3mAHQkSTmlRa> "PyPy")
+ClassAssertion(<http://webprotege.stanford.edu/RBfzKvInDnQzn8kksVHidCd> <http://webprotege.stanford.edu/R8eDjRz5ofn3mAHQkSTmlRa>)
+
+# Individual: <http://webprotege.stanford.edu/R9lTmUKy5tdfHZ4IQbi9K37> (C)
+
+AnnotationAssertion(rdfs:label <http://webprotege.stanford.edu/R9lTmUKy5tdfHZ4IQbi9K37> "C")
+ClassAssertion(<http://webprotege.stanford.edu/RDmsQnYD1AMUV6qXn98JI1z> <http://webprotege.stanford.edu/R9lTmUKy5tdfHZ4IQbi9K37>)
+
+# Individual: <http://webprotege.stanford.edu/RBu6RplOe9GFNUhL2EwtoZ1> (Python)
+
+AnnotationAssertion(rdfs:label <http://webprotege.stanford.edu/RBu6RplOe9GFNUhL2EwtoZ1> "Python")
+ClassAssertion(<http://webprotege.stanford.edu/RDmsQnYD1AMUV6qXn98JI1z> <http://webprotege.stanford.edu/RBu6RplOe9GFNUhL2EwtoZ1>)
+
+# Individual: <http://webprotege.stanford.edu/RCDaPJRFH9wax6Odrlc3Q24> (CPython)
+
+AnnotationAssertion(rdfs:label <http://webprotege.stanford.edu/RCDaPJRFH9wax6Odrlc3Q24> "CPython")
+ClassAssertion(<http://webprotege.stanford.edu/RBfzKvInDnQzn8kksVHidCd> <http://webprotege.stanford.edu/RCDaPJRFH9wax6Odrlc3Q24>)
+
+# Individual: <http://webprotege.stanford.edu/RCKSjrmMTctP0Lxhar7b4oz> (GCC)
+
+AnnotationAssertion(rdfs:label <http://webprotege.stanford.edu/RCKSjrmMTctP0Lxhar7b4oz> "GCC")
+ClassAssertion(<http://webprotege.stanford.edu/RBfzKvInDnQzn8kksVHidCd> <http://webprotege.stanford.edu/RCKSjrmMTctP0Lxhar7b4oz>)
+
+# Individual: <http://webprotege.stanford.edu/RCUw7BvL107L1Sta4bwCQiG> (C++)
+
+AnnotationAssertion(rdfs:label <http://webprotege.stanford.edu/RCUw7BvL107L1Sta4bwCQiG> "C++")
+ClassAssertion(<http://webprotege.stanford.edu/RDmsQnYD1AMUV6qXn98JI1z> <http://webprotege.stanford.edu/RCUw7BvL107L1Sta4bwCQiG>)
+
+# Individual: <http://webprotege.stanford.edu/RbtiuT2wNe3tVjsU3oy1Xh> (Rust)
+
+AnnotationAssertion(rdfs:label <http://webprotege.stanford.edu/RbtiuT2wNe3tVjsU3oy1Xh> "Rust")
+ClassAssertion(<http://webprotege.stanford.edu/RDmsQnYD1AMUV6qXn98JI1z> <http://webprotege.stanford.edu/RbtiuT2wNe3tVjsU3oy1Xh>)
+
+# Individual: <http://webprotege.stanford.edu/Rzw1PgodLqTUcIiY6Iv5JR> (Clang)
+
+AnnotationAssertion(rdfs:label <http://webprotege.stanford.edu/Rzw1PgodLqTUcIiY6Iv5JR> "Clang")
+ClassAssertion(<http://webprotege.stanford.edu/RBfzKvInDnQzn8kksVHidCd> <http://webprotege.stanford.edu/Rzw1PgodLqTUcIiY6Iv5JR>)
+
+
+)

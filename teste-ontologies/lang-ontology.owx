@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="own.tology"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="own.tology">
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="own.tology#Language"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="own.tology#GCC"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="own.tology#Python"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="own.tology#CPython"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="own.tology#Clang"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="own.tology#Implementation"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="own.tology#Rust"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="own.tology#C++"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="own.tology#Pypy"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="own.tology#C"/>
+    </Declaration>
+    <ClassAssertion>
+        <Class IRI="own.tology#Implementation"/>
+        <NamedIndividual IRI="own.tology#Pypy"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="own.tology#Language"/>
+        <NamedIndividual IRI="own.tology#C"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="own.tology#Language"/>
+        <NamedIndividual IRI="own.tology#Python"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="own.tology#Implementation"/>
+        <NamedIndividual IRI="own.tology#CPython"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="own.tology#Implementation"/>
+        <NamedIndividual IRI="own.tology#GCC"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="own.tology#Language"/>
+        <NamedIndividual IRI="own.tology#C++"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="own.tology#Language"/>
+        <NamedIndividual IRI="own.tology#Rust"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="own.tology#Implementation"/>
+        <NamedIndividual IRI="own.tology#Clang"/>
+    </ClassAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>own.tology#Pypy</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">PyPy</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>own.tology#C</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">C</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>own.tology#Implementation</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Implementation</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>own.tology#Python</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Python</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>own.tology#CPython</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">CPython</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>own.tology#GCC</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">GCC</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>own.tology#C++</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">C++</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>own.tology#Language</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Language</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>own.tology#Rust</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Rust</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>own.tology#Clang</IRI>
+        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">Clang</Literal>
+    </AnnotationAssertion>
+    <ObjectProperty ID="implements" IRI="#implements">
+        <Domain>
+            <Class IRI="own.tology#Implementation"/>
+        </Domain>
+        <Range>
+            <Class IRI="own.tology#Language"/>
+        </Range>
+    </ObjectProperty>
+</Ontology>
+
+<!-- Generated by the OWL API (version 4.5.2) https://github.com/owlcs/owlapi -->
