@@ -21,6 +21,18 @@
     \end{center}
 }
 
+\NewEnviron{answer}{%
+    \begin{samepage}
+        \begin{solution}
+            \BODY{}
+        \end{solution}
+    \end{samepage}
+}
+
+% PT-BR for exam
+\vqword{Questão:}
+\renewcommand{\solutiontitle}{\noindent\textbf{Solução:}\par\noindent}
+
 %-------------------------------------------------------------------------------
 % Project configs
 \title{Relatório de I.A.: OWL, Parte 1}
@@ -51,6 +63,8 @@
                 inferido a partir da terminologia);
 
             \item Além disso, o arquivo RDF/OWL com o modelo conceitual.
+            \item \textbf{Domínio escolhido:} Linguagens, suas implementações e
+                programas descritos nelas.
         \end{itemize}
     \end{superframe}
 
@@ -72,38 +86,48 @@
     \begin{questions}
         \question{}
         Em OWL 2, qual é a diferença entre os axiomas de class
-        \texttt{subClassOf} e \texttt{equivalentTo}? Apresente as definições de
-        cada um e exemplos de uso dos dois, dentro do domínio escolhido pela
-        dupla para a parte prática. Descreva especialmente a diferença dos
-        axiomas de classe quanto às inferências possíveis, ou seja, teste os
-        exemplos \underline{no seu domínio} e descreva as inferências.
+        \texttt{subClassOf} e \texttt{equivalentTo}?
+        \begin{itemize}
+            \item Apresente as definições de cada um e exemplos de uso dos
+                dois, dentro do domínio escolhido pela dupla para a parte
+                prática.
+            \item Descreva especialmente a diferença dos axiomas de classe
+                quanto às inferências possíveis, ou seja, teste os exemplos
+                \underline{no seu domínio} e descreva as inferências.
+        \end{itemize}
 
-        \begin{solution}
+        \begin{answer}
             \begin{description}
                 \item [\texttt{subClassOf}:] Dadas duas classes A e B e
                     individuos que pertençam a apenas uma delas. Ao se fazer
                     \texttt{subClassOf(:A :B)}, se está indicando que todo
                     elemento pertencente a A também pertence a B, \textbf{mas o
-                    contrário não necessariamente}. Sendo assim, se os
-                    elementos ${1, 2, 3}$ pertencerem a A e ${4, 5, 6}$ a B,
-                    \texttt{subClassOf(:A :B)} fará com que os indivíduos que
-                    pertencem a A e B sejam, respectivamente, ${1, 2, 3}$ e
-                    ${1, 2, 3, 4, 5, 6}$;
+                    contrário não necessariamente}, ou seja: $A \subseteq B$.
+                    Sendo assim, para $\{1, 2, 3\} \in A$ e $\{4, 5, 6\} \in
+                    B$, \texttt{subClassOf(:A :B)} fará com que os indivíduos
+                    que pertencem a A e B sejam, respectivamente, $\{1, 2, 3\}$
+                    e $\{1, 2, 3, 4, 5, 6\}$;
+
+                    \textbf{Exemplo:} No domínio escolhido para a parte
+                    prática, foi definido que toda \texttt{VirtualMachine} é
+                    também um \texttt{Program}. Porém, faz sentido que nem todo
+                    programa seja uma \texttt{VirtualMachine}: \todo{YAY}.
+
                 \item [\texttt{equivalentTo}:] Dadas duas classes A e B e
                     indivíduos que pertençam a apenas uma delas. Ao se fazer
                     \texttt{equivalentTo}, se está indicando que todo elemento
                     pertencente a A também pertence a B, \textbf{e vice-versa}.
-                    Sendo assim, se os elementos ${1, 2, 3}$ pertencerem a A e
-                    ${4, 5, 6}$ a B, \texttt{equivalentTo(:A :B)} fará com que
-                    tanto A quanto B sejam compostas pelos indivíduos ${1, 2,
-                    3, 4, 5, 6}$.
+                    Sendo assim, para $\{1, 2, 3\} \in A$ e $\{4, 5, 6\} \in
+                    B$, \texttt{equivalentTo(:A :B)} fará com que tanto A
+                    quanto B sejam compostas pelos indivíduos $\{1, 2, 3, 4,
+                    5, 6\}$.
             \end{description}
 
             \todo{%
                 Exemplificar com elementos do domínio escolhido na parte
                 prática.
             }
-        \end{solution}
+        \end{answer}
 
         \question{}
         Compare a lógica descritiva que fundamenta a OWL 2 (na sua variação
@@ -111,8 +135,8 @@
         possível expressar com lógica de 1ª ordem que não conseguimos com
         lógica descritiva.
 
-        \begin{solution}
-        \end{solution}
+        \begin{answer}
+        \end{answer}
     \end{questions}
 
     \section{Parte 2: Prática}

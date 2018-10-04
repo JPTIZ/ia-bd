@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://own.tology"
+         xmlns="http://own.tology#">
+
+<owl:Ontology rdf:about="http://own.tology"/>
+
+<owl:Class rdf:about="#Language">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Implementation">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass rdf:resource="#Program"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Program">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass rdf:resource="#Implementation"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Compiler">
+  <rdfs:subClassOf rdf:resource="#Implementation"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Interpreter">
+  <rdfs:subClassOf rdf:resource="#Implementation"/>
+</owl:Class>
+
+<owl:ObjectProperty rdf:about="#implements">
+  <rdfs:domain rdf:resource="#Implementation"/>
+  <rdfs:range rdf:resource="#Language"/>
+</owl:ObjectProperty>
+
+<Language rdf:about="#Python">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Language>
+
+<Interpreter rdf:about="#CPython">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#Python"/>
+</Interpreter>
+
+<Interpreter rdf:about="#Pypy">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:resource="#Python"/>
+</Interpreter>
+
+
+</rdf:RDF>
