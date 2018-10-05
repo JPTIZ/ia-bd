@@ -63,10 +63,29 @@
                 inferido a partir da terminologia);
 
             \item Além disso, o arquivo RDF/OWL com o modelo conceitual.
-            \item \textbf{Domínio escolhido:} Linguagens, suas implementações e
-                programas descritos nelas.
         \end{itemize}
     \end{superframe}
+
+    \section{Domínio escolhido}
+
+    \subsection{Domínio escolhido}
+
+    Linguagens, suas implementações e programas descritos nelas.
+
+    \subsection{Principais Classes:}
+
+    \begin{itemize}
+        \item \textbf{Language:} Representa linguagens de programação (e.g.
+            Python, Ruby, C\ldots);
+        \item \textbf{Implementation:} Representa uma implementação de uma
+            linguagem de programação. Por exemplo: CPython, Pypy e MicroPython
+            são implementações de Python;
+        \item \textbf{Compiler:} Representa um compilador, podendo incluir
+            JITs. Identifica-se um compilador como AOT (\textit{Ahead of Time})
+            pela propriedade \texttt{aot}. A negativa dessa propriedade
+            identifica o compilador como JIT\@.
+        \item \textbf{Interpreter:} Representa um interpretador.
+    \end{itemize}
 
     \section{Parte 1: Pesquisa Teórica}
 
@@ -111,7 +130,12 @@
                     \textbf{Exemplo:} No domínio escolhido para a parte
                     prática, foi definido que toda \texttt{VirtualMachine} é
                     também um \texttt{Program}. Porém, faz sentido que nem todo
-                    programa seja uma \texttt{VirtualMachine}: \todo{YAY}.
+                    programa seja uma \texttt{VirtualMachine}: nesse caso, não
+                    é possível inferir, por exemplo, que o GCC seja uma
+                    \texttt{VirtualMachine} mesmo que seja um \texttt{Program}.
+                    Porém, é possível inferir que o GCC é um \texttt{Program}
+                    simplesmente por defini-lo como um \texttt{Compiler},
+                    afinal todo compilador é também um programa.
 
                 \item [\texttt{equivalentTo}:] Dadas duas classes A e B e
                     indivíduos que pertençam a apenas uma delas. Ao se fazer

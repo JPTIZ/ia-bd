@@ -14,7 +14,6 @@
 
 <owl:Class rdf:about="#Implementation">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <owl:equivalentClass rdf:resource="#Program"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Program">
@@ -28,6 +27,10 @@
 
 <owl:Class rdf:about="#Interpreter">
   <rdfs:subClassOf rdf:resource="#Implementation"/>
+</owl:Class>
+
+<owl:Class rdf:about="#VirtualMachine">
+  <rdfs:subClassOf rdf:resource="#Program"/>
 </owl:Class>
 
 <owl:ObjectProperty rdf:about="#implements">
