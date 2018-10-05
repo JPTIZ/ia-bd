@@ -16,7 +16,7 @@ def build_stub_ontology(prefix: str = 'http://own.tology'):
             pass
 
         class Program(owl.Thing):
-            equivalent_to = [Implementation]
+            pass
 
         class Compiler(Implementation):
             pass
@@ -29,6 +29,9 @@ def build_stub_ontology(prefix: str = 'http://own.tology'):
 
         # Behaviors
         class implements(Implementation >> Language):
+            pass
+
+        class runs_in(Compiler >> VirtualMachine):
             pass
 
     python = Language('Python')
