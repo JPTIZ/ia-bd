@@ -12,14 +12,16 @@
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
 </owl:Class>
 
+<owl:Class rdf:about="#Dialect">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
 <owl:Class rdf:about="#Implementation">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <owl:equivalentClass rdf:resource="#Program"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Program">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  <owl:equivalentClass rdf:resource="#Implementation"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Compiler">
@@ -32,27 +34,85 @@
 
 <owl:Class rdf:about="#VirtualMachine">
   <rdfs:subClassOf rdf:resource="#Program"/>
-  <rdfs:subClassOf rdf:resource="#Implementation"/>
 </owl:Class>
+
+<owl:ObjectProperty rdf:about="#mother">
+  <rdfs:domain rdf:resource="#Dialect"/>
+  <rdfs:range rdf:resource="#Language"/>
+</owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#implements">
   <rdfs:domain rdf:resource="#Implementation"/>
   <rdfs:range rdf:resource="#Language"/>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="#runs_in">
+  <rdfs:domain rdf:resource="#Compiler"/>
+  <rdfs:range rdf:resource="#VirtualMachine"/>
+</owl:ObjectProperty>
+
 <Language rdf:about="#Python">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </Language>
 
+<Language rdf:about="#C++">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Language>
+
+<Dialect rdf:about="#HolyC">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <mother rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C</mother>
+</Dialect>
+
+<Dialect rdf:about="#SystemC">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <mother rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C++</mother>
+</Dialect>
+
+<Dialect rdf:about="#Boo">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <mother rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Python</mother>
+</Dialect>
+
+<Compiler rdf:about="#gcc">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C</implements>
+</Compiler>
+
+<Compiler rdf:about="#g++">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C</implements>
+</Compiler>
+
+<Compiler rdf:about="#native-image">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <implements rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Java</implements>
+  <runs_in rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GraalVM</runs_in>
+</Compiler>
+
 <Interpreter rdf:about="#CPython">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <implements rdf:resource="#Python"/>
+  <implements rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Python</implements>
+  <runs_in rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PyVM</runs_in>
 </Interpreter>
 
 <Interpreter rdf:about="#Pypy">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  <implements rdf:resource="#Python"/>
+  <implements rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Python</implements>
+  <runs_in rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PyVM</runs_in>
 </Interpreter>
+
+<VirtualMachine rdf:about="#PyVM">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</VirtualMachine>
+
+<VirtualMachine rdf:about="#JVM">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</VirtualMachine>
+
+<VirtualMachine rdf:about="#GraalVM">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</VirtualMachine>
 
 
 </rdf:RDF>

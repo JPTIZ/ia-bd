@@ -1,0 +1,38 @@
+{
+    "languages": {
+        "Python": {},
+        "C++": {}
+    },
+    "dialects": {
+        "HolyC": "C",
+        "SystemC": "C++",
+        "Boo": "Python"
+    },
+    "compilers": {
+        "gcc": {
+            "implements": "C"
+        },
+        "g++": {
+            "implements": "C"
+        },
+        "native-image": {
+            "implements": "Java",
+            "runs_in": "GraalVM"
+        }
+    },
+    "interpreters": {
+        "CPython": {
+            "implements": "Python",
+            "runs_in": "PyVM"
+        },
+        "Pypy": {
+            "implements": "Python",
+            "runs_in": "PyVM"
+        }
+    },
+    "vm": {
+        "PyVM": {},
+        "JVM": {},
+        "GraalVM": {}
+    }
+}

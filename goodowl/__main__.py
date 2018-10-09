@@ -1,4 +1,5 @@
 from sys import argv
+import json
 
 from carl import command, Arg
 import owlready2 as owl
@@ -11,6 +12,9 @@ def build_stub_ontology(prefix: str = 'http://own.tology'):
         # Definitions
         class Language(owl.Thing):
             pass
+
+        class Dialect(owl.Thing):
+            equivalent_to = Language
 
         class Implementation(owl.Thing):
             pass
@@ -27,6 +31,10 @@ def build_stub_ontology(prefix: str = 'http://own.tology'):
         class VirtualMachine(Program):
             pass
 
+        # Properties
+        class mother(Dialect >> Language):
+            pass
+
         # Behaviors
         class implements(Implementation >> Language):
             pass
@@ -34,11 +42,52 @@ def build_stub_ontology(prefix: str = 'http://own.tology'):
         class runs_in(Compiler >> VirtualMachine):
             pass
 
-    python = Language('Python')
-    cpython = Interpreter('CPython')
-    cpython.implements = [python]
-    pypy = Interpreter('Pypy')
-    pypy.implements = [python]
+    with open('stub.json') as f:
+        contents = json.load(f)
+
+    data = {}
+
+    for name in contents['languages']:
+        lang = Language(name)
+        data[name] = lang
+
+    for name, mother in contents['dialects'].items():
+        lang = Dialect(name)
+        lang.mother = [mother]
+        data[name] = lang
+
+    for name, properties in contents['compilers'].items():
+        compiler = Compiler(name)
+
+        try:
+            compiler.implements = [properties['implements']]
+        except KeyError:
+            pass
+
+        try:
+            compiler.runs_in = [properties['runs_in']]
+        except KeyError:
+            pass
+
+        data[name] = compiler
+
+    for name, properties in contents['interpreters'].items():
+        interpreter = Interpreter(name)
+
+        try:
+            interpreter.implements = [properties['implements']]
+        except KeyError:
+            pass
+
+        try:
+            interpreter.runs_in = [properties['runs_in']]
+        except KeyError:
+            pass
+
+        data[name] = interpreter
+
+    for name in contents['vm']:
+        vm = VirtualMachine(name)
 
     return onto
 
@@ -60,7 +109,7 @@ def load_ontology(path: str):
 def show_classes(onto: owl.namespace.Ontology):
     print(type(onto))
     classes = [*onto.classes()]
-    print(f'\n[INFO] {len(classes)} found:')
+    print(f'\n[INFO] Found {len(classes)} classes:')
     for _class in classes:
         print(f'       Class {_class}:\n'
               f'           Ancestors: {_class.ancestors()}\n'
