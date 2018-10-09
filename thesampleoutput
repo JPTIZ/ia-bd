@@ -1,0 +1,43 @@
+[INFO] Welcome to the new ontology analyser!
+[INFO] Building stub ontology...Done
+<class 'owlready2.namespace.Ontology'>
+
+[INFO] Found 7 classes:
+       Class own.tology.Language:
+           Ancestors: {owl.Thing, own.tology.Language, own.tology.Dialect}
+           Instances: [own.tology.Python, own.tology.C++, own.tology.HolyC, own.tology.SystemC, own.tology.Boo]
+       Class own.tology.Dialect:
+           Ancestors: {owl.Thing, own.tology.Language, own.tology.Dialect}
+           Instances: [own.tology.Python, own.tology.C++, own.tology.HolyC, own.tology.SystemC, own.tology.Boo]
+       Class own.tology.Implementation:
+           Ancestors: {owl.Thing, own.tology.Implementation}
+           Instances: [own.tology.gcc, own.tology.g++, own.tology.native-image, own.tology.CPython, own.tology.Pypy]
+       Class own.tology.Program:
+           Ancestors: {own.tology.Program, owl.Thing}
+           Instances: [own.tology.PyVM, own.tology.JVM, own.tology.GraalVM]
+       Class own.tology.Compiler:
+           Ancestors: {own.tology.Implementation, owl.Thing, own.tology.Compiler}
+           Instances: [own.tology.gcc, own.tology.g++, own.tology.native-image]
+       Class own.tology.Interpreter:
+           Ancestors: {own.tology.Interpreter, owl.Thing, own.tology.Implementation}
+           Instances: [own.tology.CPython, own.tology.Pypy]
+       Class own.tology.VirtualMachine:
+           Ancestors: {own.tology.Program, own.tology.VirtualMachine, owl.Thing}
+           Instances: [own.tology.PyVM, own.tology.JVM, own.tology.GraalVM]
+
+[INFO] Object properties:
+       1. own.tology.mother
+       2. own.tology.implements
+       3. own.tology.runs_in
+
+[INFO] Showing all implementations:
+[INFO] own.tology.gcc implements:
+    1: C
+[INFO] own.tology.g++ implements:
+    1: C
+[INFO] own.tology.native-image implements:
+    1: Java
+[INFO] own.tology.CPython implements:
+    1: Python
+[INFO] own.tology.Pypy implements:
+    1: Python

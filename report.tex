@@ -5,8 +5,9 @@
 % Packages
 \usepackage{amsmath}
 \usepackage[portuguese]{babel}
-\usepackage{hyperref}
 \usepackage{environ}
+\usepackage{hyperref}
+\usepackage{minted}
 \usepackage{xcolor}
 
 %-------------------------------------------------------------------------------
@@ -29,9 +30,16 @@
     \end{samepage}
 }
 
+\newmintedfile[textfile]{text}{autogobble, breaklines}
+
+\newcommand{\result}[2]{\textfile[firstline=#1, lastline=#2]{thesampleoutput}}
+\newcommand{\ontology}[2]{\textfile[firstline=#1, lastline=#2]{lang-ontology.owl}}
+
 % PT-BR for exam
 \vqword{Questão:}
-\renewcommand{\solutiontitle}{\noindent\textbf{Solução:}\par\noindent}
+\renewcommand{\solutiontitle}{\noindent\textbf{Resposta:}\par\noindent}
+
+\unframedsolutions{}
 
 %-------------------------------------------------------------------------------
 % Project configs
@@ -66,7 +74,7 @@
         \end{itemize}
     \end{superframe}
 
-    \section{Domínio escolhido}
+    \section{Decisões do trabalho}
 
     \subsection{Domínio escolhido}
 
@@ -116,48 +124,75 @@
                 \underline{no seu domínio} e descreva as inferências.
         \end{itemize}
 
+        \clearpage{}
+
         \begin{answer}
-            \begin{description}
-                \item [\texttt{subClassOf}:] Dadas duas classes A e B e
-                    individuos que pertençam a apenas uma delas. Ao se fazer
-                    \texttt{subClassOf(:A :B)}, se está indicando que todo
-                    elemento pertencente a A também pertence a B, \textbf{mas o
-                    contrário não necessariamente}, ou seja: $A \subseteq B$.
-                    Sendo assim, para $\{1, 2, 3\} \in A$ e $\{4, 5, 6\} \in
-                    B$, \texttt{subClassOf(:A :B)} fará com que os indivíduos
-                    que pertencem a A e B sejam, respectivamente, $\{1, 2, 3\}$
-                    e $\{1, 2, 3, 4, 5, 6\}$;
+            \textbf{\texttt{subClassOf}:}
 
-                    \textbf{Exemplo:} No domínio escolhido para a parte
-                    prática, foi definido que toda \texttt{VirtualMachine} é
-                    também um \texttt{Program}. Porém, faz sentido que nem todo
-                    programa seja uma \texttt{VirtualMachine}: nesse caso, não
-                    é possível inferir, por exemplo, que o GCC seja uma
-                    \texttt{VirtualMachine} mesmo que seja um \texttt{Program}.
-                    Porém, é possível inferir que o GCC é um \texttt{Program}
-                    simplesmente por defini-lo como um \texttt{Compiler},
-                    afinal todo compilador é também um programa.
+            Dadas duas classes A e B e individuos que pertençam a apenas uma
+            delas. Ao se fazer \texttt{subClassOf(:A :B)}, se está indicando
+            que todo elemento pertencente a A também pertence a B, \textbf{mas
+            o contrário não necessariamente}, ou seja: $A \subseteq B$.  Sendo
+            assim, para $\{1, 2, 3\} \in A$ e $\{4, 5, 6\} \in B$,
+            \texttt{subClassOf(:A :B)} fará com que os indivíduos que pertencem
+            a A e B sejam, respectivamente, $\{1, 2, 3\}$ e $\{1, 2, 3, 4, 5,
+            6\}$.
 
-                \item [\texttt{equivalentTo}:] Dadas duas classes A e B e
-                    indivíduos que pertençam a apenas uma delas. Ao se fazer
-                    \texttt{equivalentTo}, se está indicando que todo elemento
-                    pertencente a A também pertence a B, \textbf{e vice-versa}.
-                    Sendo assim, para $\{1, 2, 3\} \in A$ e $\{4, 5, 6\} \in
-                    B$, \texttt{equivalentTo(:A :B)} fará com que tanto A
-                    quanto B sejam compostas pelos indivíduos $\{1, 2, 3, 4,
-                    5, 6\}$.
+            \textbf{Exemplo:}
 
-                    \textbf{Exemplo:} Foi definido que.
-            \end{description}
+            No domínio escolhido para a parte prática, foi definido que toda
+            \textbf{Máquina Virtual} (VM) é também um \textbf{Programa}. Porém,
+            faz sentido que nem todo programa seja uma VM\@: nesse caso, não é
+            possível inferir, por exemplo, que o GCC seja uma VM mesmo que seja
+            um programa.  Porém, é possível inferir que o GCC é um programa
+            simplesmente por defini-lo como um compilador, afinal todo
+            compilador é também um programa.
 
-            \todo{%
-                Exemplificar com elementos do domínio escolhido na parte
-                prática.
-            }
+            Na prática, tem-se as seguintes definições de classes em OWL2:
+
+            \ontology{23}{25}
+            \ontology{35}{37}
+
+            E a instância ``JVM'' foi definida da forma:
+
+            \ontology{105}{107}
+
+            Partindo dessa instância (e de outras VMs), é possível ver que, ao
+            carregá-las para o leitor de OWL2, elas são atribuídas à classe
+            \texttt{Program}:
+
+            \result{15}{17}
+
+            É perceptível que, apesar de não declaradas explicitamente como
+            programas, as instâncias foram inferidas como sendo da classe
+            \texttt{Program}.
+
+            \textbf{\texttt{equivalentTo}:}
+
+            Dadas duas classes A e B e indivíduos que pertençam a apenas uma
+            delas. Ao se fazer \texttt{equivalentTo}, se está indicando que
+            todo elemento pertencente a A também pertence a B, \textbf{e
+            vice-versa}.  Sendo assim, para $\{1, 2, 3\} \in A$ e $\{4, 5, 6\}
+            \in B$, \texttt{equivalentTo(:A :B)} fará com que tanto A quanto B
+            sejam compostas pelos indivíduos $\{1, 2, 3, 4, 5, 6\}$.
+
+            \textbf{Exemplo:}
+
+            Foi definido que existem \textbf{Linguagens} e \textbf{Dialetos}. É
+            fato que todo dialeto também é uma linguagem de programação, visto
+            que tem um compilador próprio, não necessariamente um programa
+            escrito em um dialeto compila na linguagem na qual foi baseado,
+            além de tem suas próprias especificidades. Da mesma forma, a
+            descrição de uma linguagem de programação descreve também um
+            dialeto (como uma espécie de ``dialeto-pai''). Porém, ainda assim,
+            nem um nem outro são o mesmo conceito: dialetos são variações de
+            uma linguagem, enquanto que linguagens são linguagens como ampla
+            definição.  Sendo assim, qualquer elemento descrito como linguagem
+            será inferido como dialeto e vice-versa.
         \end{answer}
 
         \question{}
-        Compare a lógica descritiva que fundamenta a OWL 2 (na sua variação
+        Compare a Lógica Descritiva que fundamenta a OWL 2 (na sua variação
         mais expressiva) com lógica de 1ª ordem. Apresente um exemplo do que é
         possível expressar com lógica de 1ª ordem que não conseguimos com
         lógica descritiva.
