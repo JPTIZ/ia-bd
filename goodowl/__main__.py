@@ -1,6 +1,7 @@
 from enum import Enum
 from sys import argv
 import json
+import pprint
 
 from carl import command, Arg
 import owlready2 as owl
@@ -33,17 +34,17 @@ def build_stub_ontology(prefix: str = 'http://own.tology'):
         class Implementation(owl.Thing):
             pass
 
-        class GeneralPurpose(Language):
-            pass
-
         class Domain(owl.Thing):
             pass
 
-        class for_domain(Language >> Domain):
+        class target_domain(Language >> Domain):
             pass
 
         class DomainSpecific(Language):
-            equivalent_to = [Language & for_domain.max(1, Domain)]
+            equivalent_to = [Language & target_domain.max(1, Domain)]
+
+        class GeneralPurpose(Language):
+            equivalent_to = [Language & target_domain.exactly(0, Domain)]
 
         # Software-related
         class Program(owl.Thing):
@@ -74,8 +75,15 @@ def build_stub_ontology(prefix: str = 'http://own.tology'):
 
     data = {}
 
-    for name in contents['languages']:
+    for name, about in contents['languages'].items():
         lang = Language(name)
+
+        try:
+            lang.target_domain = [Domain(a) for a in about['domains']]
+        except KeyError as e:
+            print('    ', end='')
+            log(Log.INFO, f'{name} has no about[{e}]')
+
         data[name] = lang
 
     for name, mother in contents['dialects'].items():
@@ -122,19 +130,18 @@ def build_stub_ontology(prefix: str = 'http://own.tology'):
 def load_ontology(path: str):
     log(Log.INFO, f'Welcome to the new ontology analyser!')
     if path == '--stub':
-        log(Log.INFO, f'Building stub ontology...', end='')
+        log(Log.INFO, f'Building stub ontology...')
         onto = build_stub_ontology()
     else:
-        log(Log.INFO, f'Analysing "{path}"...', end='')
+        log(Log.INFO, f'Analysing "{path}"...')
         owl.onto_path.append(path)
         onto = owl.get_ontology(path).load()
-    print('Done')
+    log(Log.GOOD, 'Done loading ontology.')
 
     return onto
 
 
 def show_classes(onto: owl.namespace.Ontology):
-    print(type(onto))
     classes = [*onto.classes()]
     log(Log.INFO, f'Found {len(classes)} classes:')
     for _class in classes:
@@ -179,6 +186,11 @@ def show_inconsistencies(onto):
         log(Log.GOOD, f'There are no inconsistent classes.')
 
 
+def show_class(onto, classname):
+    log(Log.INFO, f'About {classname}: ')
+    print(pprint.pformat(onto[classname].__dict__))
+
+
 @command
 def main(path: str = '',
          output: str = None,
@@ -200,8 +212,10 @@ def main(path: str = '',
             owl.sync_reasoner()
 
     show_inconsistencies(onto)
+    show_classes(onto)
     if output:
         onto.save(file=output, format='rdfxml')
+    show_class(onto, 'SQL')
 
 
 if __name__ == '__main__':

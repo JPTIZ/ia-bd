@@ -20,6 +20,48 @@
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
 </owl:Class>
 
+<owl:Class rdf:about="#Domain">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:ObjectProperty rdf:about="#target_domain">
+  <rdfs:domain rdf:resource="#Language"/>
+  <rdfs:range rdf:resource="#Domain"/>
+</owl:ObjectProperty>
+
+<owl:Class rdf:about="#DomainSpecific">
+  <rdfs:subClassOf rdf:resource="#Language"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Language"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#target_domain"/>
+          <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+          <owl:onClass rdf:resource="#Domain"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#GeneralPurpose">
+  <rdfs:subClassOf rdf:resource="#Language"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Language"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#target_domain"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:qualifiedCardinality>
+          <owl:onClass rdf:resource="#Domain"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#DomainSpecific"/>
+</owl:Class>
+
 <owl:Class rdf:about="#Program">
   <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
 </owl:Class>
@@ -58,6 +100,15 @@
 <Language rdf:about="#C++">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </Language>
+
+<Language rdf:about="#SQL">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <target_domain rdf:resource="#Databases"/>
+</Language>
+
+<Domain rdf:about="#Databases">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Domain>
 
 <Dialect rdf:about="#HolyC">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>

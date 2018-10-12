@@ -1,7 +1,10 @@
 {
     "languages": {
         "Python": {},
-        "C++": {}
+        "C++": {},
+        "SQL": {
+            "domains": ["Databases"]
+        }
     },
     "dialects": {
         "HolyC": "C",
