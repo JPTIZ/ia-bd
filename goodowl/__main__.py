@@ -1,3 +1,4 @@
+from enum import Enum
 from sys import argv
 import json
 
@@ -5,11 +6,24 @@ from carl import command, Arg
 import owlready2 as owl
 
 
+class Log(Enum):
+    RESET = '\033[0m'
+    INFO = '\033[93m'
+    GOOD = '\033[92m'
+    ERROR = '\033[91m'
+
+
+def log(kind, text, *args, **kwargs):
+    print(f'[{kind.value}{kind.name}{Log.RESET.value}] {text}', *args, **kwargs)
+
+
 def build_stub_ontology(prefix: str = 'http://own.tology'):
     onto = owl.get_ontology(prefix)
 
     with onto:
         # Definitions
+
+        # Language-related
         class Language(owl.Thing):
             pass
 
@@ -19,6 +33,19 @@ def build_stub_ontology(prefix: str = 'http://own.tology'):
         class Implementation(owl.Thing):
             pass
 
+        class GeneralPurpose(Language):
+            pass
+
+        class Domain(owl.Thing):
+            pass
+
+        class for_domain(Language >> Domain):
+            pass
+
+        class DomainSpecific(Language):
+            equivalent_to = [Language & for_domain.max(1, Domain)]
+
+        # Software-related
         class Program(owl.Thing):
             pass
 
@@ -93,12 +120,12 @@ def build_stub_ontology(prefix: str = 'http://own.tology'):
 
 
 def load_ontology(path: str):
-    print('[INFO] Welcome to the new ontology analyser!')
+    log(Log.INFO, f'Welcome to the new ontology analyser!')
     if path == '--stub':
-        print(f'[INFO] Building stub ontology...', end='')
+        log(Log.INFO, f'Building stub ontology...', end='')
         onto = build_stub_ontology()
     else:
-        print(f'[INFO] Analysing "{path}"...', end='')
+        log(Log.INFO, f'Analysing "{path}"...', end='')
         owl.onto_path.append(path)
         onto = owl.get_ontology(path).load()
     print('Done')
@@ -109,7 +136,7 @@ def load_ontology(path: str):
 def show_classes(onto: owl.namespace.Ontology):
     print(type(onto))
     classes = [*onto.classes()]
-    print(f'\n[INFO] Found {len(classes)} classes:')
+    log(Log.INFO, f'Found {len(classes)} classes:')
     for _class in classes:
         print(f'       Class {_class}:\n'
               f'           Ancestors: {_class.ancestors()}\n'
@@ -119,22 +146,22 @@ def show_classes(onto: owl.namespace.Ontology):
 def show_obj_properties(onto: owl.namespace.Ontology):
     obj_props = [*onto.object_properties()]
     if obj_props:
-        print(f'\n[INFO] Object properties:')
+        log(Log.INFO, f'Object properties:')
         for i, prop in enumerate(obj_props):
             print(f'       {i+1}. {prop}')
     else:
-        print('\n[INFO] No Object Properties.')
+        log(Log.INFO, 'No Object Properties.')
 
 
 NOCLASS = object()
 def show_which_implements(onto: owl.namespace.Ontology, classname: str):
     def show_impl(impl: str):
-        print(f'[INFO] {impl} implements:')
+        log(Log.INFO, f'{impl} implements:')
         for i, lang in enumerate(impl.implements):
             print(f'    {i+1}: {lang}')
 
     if classname is NOCLASS:
-        print('\n[INFO] Showing all implementations:')
+        log(Log.INFO, 'Showing all implementations:')
         for impl in onto['Implementation'].instances():
             show_impl(impl)
     else:
@@ -146,10 +173,10 @@ def show_inconsistencies(onto):
     if inconsistencies:
         for i, _class in enumerate(inconsistencies[1:]):
             if i == 0 and inconsistencies:
-                print('[WARN] There are inconsistent classes:')
+                log(Log.WARN, f'There are inconsistent classes:')
             print(f'       {i + 1} {_class}')
     else:
-        print('[GOOD] There are no inconsistent classes.')
+        log(Log.GOOD, f'There are no inconsistent classes.')
 
 
 @command
@@ -160,7 +187,7 @@ def main(path: str = '',
     if stub:
         path = '--stub'
     else:
-        print('[ERROR] Missing filename')
+        log(Log.ERROR, f'Missing filename')
         exit(1)
 
     onto = load_ontology(path)
