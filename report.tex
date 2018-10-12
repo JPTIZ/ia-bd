@@ -5,6 +5,7 @@
 % Packages
 \usepackage{amsmath}
 \usepackage[portuguese]{babel}
+\usepackage{capt-of}
 \usepackage{environ}
 \usepackage{hyperref}
 \usepackage{minted}
@@ -34,6 +35,23 @@
 
 \newcommand{\result}[2]{\textfile[firstline=#1, lastline=#2]{thesampleoutput}}
 \newcommand{\ontology}[2]{\textfile[firstline=#1, lastline=#2]{lang-ontology.owl}}
+
+\newcounter{equationset}
+\newdimen\captionlength
+\newcommand{\equationset}[1]{
+    \refstepcounter{equationset}
+    \setlength{\captionlength}{\widthof{#1}}
+    \addtolength{\captionlength}{\widthof{Equação~\theequationset: }}
+    \ifthenelse{\lengthtest{\captionlength < \linewidth}}{%
+        \begin{center}
+            Equação~\theequationset: #1
+        \end{center}
+    }{%
+        \begin{flushleft}
+            Equação~\theequationset: #1 %
+        \end{flushleft}
+    }
+}
 
 % PT-BR for exam
 \vqword{Questão:}
@@ -200,10 +218,11 @@
         \begin{answer}
             Na prática, DLs (\textit{Descriptive Logics}) geralmente podem ser
             vistas como subconjuntos \textbf{decidíveis} de FOL
-            (\textit{First-Order Logic})~\cite{Tsarkov2003DLRV}. Portanto, todo
-            problema descrito com FOL é também descritível com DL, porém o
-            contrário não é verdade: FOLs que descrevem problemas indecidíveis
-            não possuem uma descrição em determinadas DLs.
+            (\textit{First-Order Logic})~\cite{tsarkov:2003}. Isso significa
+            que, para algumas DLs, é verdadeiro que um problema $x$ pertencente
+            ao conjunto de problemas descritíveis com tal DL é também
+            descritível com FOL, porém o contrário não se mantém verdade, dado
+            que FOL descreve também problemas indecidíveis.
 
             Da parte de OWL 2, esta é uma DL cuja expressividade é semelhante à
             de $\mathcal{SROIQ^{(D)}}$ (nomenclatura que se dá devido às
@@ -212,8 +231,24 @@
             que inclui nominais tais como \texttt{owl:hasValue}, que impõem
             restrições aos valores dos
             objetos~\cite{wikipedia:description-logic}).
+            $\mathcal{SROIQ^{(D)}}$ permite relações transitivas (como
+            \texttt{subClassOf}), cujo equivalente em FOL implica na
+            necessidade de 3 variáveis para resolução (conforme demonstrado na
+            Equação~\ref{transitive-fol}) e portanto
+            indecidível~\cite{tsarkov:2003}, o que por consequência significa
+            que a DL de OWL 2 permite descrever problemas indecidíveis.
 
+            \begin{align}
+                \label{transitive-fol}
+                \forall{x}\forall{y}\forall{z}(\phi_{T}(x, y) \land \phi_{T}(y, z) \rightarrow \phi_{T}(x, z))
+            \end{align}
+            \equationset{%
+                Relação de transitividade para uma determinada relação T\@.
+                $\phi{T}$ mapeia um conceito T descrito em DL a um predicado
+                unário.
+            }
 
+            Não conseguimos, porém, encontrar um exemplo claro do que não é possível adsf
         \end{answer}
     \end{questions}
 
