@@ -234,9 +234,11 @@
             $\mathcal{SROIQ^{(D)}}$ permite relações transitivas (como
             \texttt{subClassOf}), cujo equivalente em FOL implica na
             necessidade de 3 variáveis para resolução (conforme demonstrado na
-            Equação~\ref{transitive-fol}) e portanto
-            indecidível~\cite{tsarkov:2003}, o que por consequência significa
-            que a DL de OWL 2 permite descrever problemas indecidíveis.
+            Equação~\ref{transitive-fol}), o que é demonstrado ser
+            indecidível~\cite{tsarkov:2003} --- corroborado pela decisão de
+            restringir a no máximo duas variáveis consideradas
+            em~\cite{frank:2001} ---, e consequência significa que a DL de OWL
+            2 permite descrever problemas indecidíveis.
 
             \begin{align}
                 \label{transitive-fol}
@@ -248,7 +250,10 @@
                 unário.
             }
 
-            Não conseguimos, porém, encontrar um exemplo claro do que não é possível adsf
+            Não conseguimos, porém, encontrar um exemplo claro do que não é
+            possível fazer com DL e que seja com FOL\@. Toda documentação
+            descreve que DLs são fragmentos de FOL, mas nenhuma indica em que
+            ponto elas se dividem.
         \end{answer}
     \end{questions}
 
