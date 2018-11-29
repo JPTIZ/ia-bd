@@ -1,5 +1,4 @@
 from enum import Enum
-from sys import argv
 import json
 import pprint
 
@@ -15,7 +14,9 @@ class Log(Enum):
 
 
 def log(kind, text, *args, **kwargs):
-    print(f'[{kind.value}{kind.name}{Log.RESET.value}] {text}', *args, **kwargs)
+    print(f'[{kind.value}{kind.name}{Log.RESET.value}] {text}',
+          *args,
+          **kwargs)
 
 
 def build_stub_ontology(prefix: str = 'http://own.tology'):
@@ -86,9 +87,9 @@ def build_stub_ontology(prefix: str = 'http://own.tology'):
 
         data[name] = lang
 
-    for name, mother in contents['dialects'].items():
+    for name, _mother in contents['dialects'].items():
         lang = Dialect(name)
-        lang.mother = [mother]
+        lang.mother = [_mother]
         data[name] = lang
 
     for name, properties in contents['compilers'].items():
@@ -122,7 +123,7 @@ def build_stub_ontology(prefix: str = 'http://own.tology'):
         data[name] = interpreter
 
     for name in contents['vm']:
-        vm = VirtualMachine(name)
+        VirtualMachine(name)
 
     return onto
 
@@ -145,9 +146,11 @@ def show_classes(onto: owl.namespace.Ontology):
     classes = [*onto.classes()]
     log(Log.INFO, f'Found {len(classes)} classes:')
     for _class in classes:
+        ans = [str(ans).split('.')[-1] for ans in _class.ancestors()]
+        ins = [str(ins).split('.')[-1] for ins in _class.instances()]
         print(f'       Class {_class}:\n'
-              f'           Ancestors: {_class.ancestors()}\n'
-              f'           Instances: {_class.instances()}')
+              f'           Ancestors: {ans}\n'
+              f'           Instances: {ins}')
 
 
 def show_obj_properties(onto: owl.namespace.Ontology):
@@ -161,6 +164,8 @@ def show_obj_properties(onto: owl.namespace.Ontology):
 
 
 NOCLASS = object()
+
+
 def show_which_implements(onto: owl.namespace.Ontology, classname: str):
     def show_impl(impl: str):
         log(Log.INFO, f'{impl} implements:')
@@ -169,8 +174,8 @@ def show_which_implements(onto: owl.namespace.Ontology, classname: str):
 
     if classname is NOCLASS:
         log(Log.INFO, 'Showing all implementations:')
-        for impl in onto['Implementation'].instances():
-            show_impl(impl)
+        # for impl in onto['webprotege.stanford.edu.RBcN21gLfPDk63bFltEHZTL'].instances():
+        #     show_impl(impl)
     else:
         show_impl(classname)
 
@@ -194,11 +199,11 @@ def show_class(onto, classname):
 @command
 def main(path: str = '',
          output: str = None,
-         stub: Arg(action='store_true') = False,
-         infer: Arg(action='store_true') = False):
+         stub: Arg(action = 'store_true') = False,
+         infer: Arg(action = 'store_true') = False):
     if stub:
         path = '--stub'
-    else:
+    elif not path:
         log(Log.ERROR, f'Missing filename')
         exit(1)
 
@@ -214,8 +219,8 @@ def main(path: str = '',
     show_inconsistencies(onto)
     show_classes(onto)
     if output:
-        onto.save(file=output, format='rdfxml')
-    show_class(onto, 'SQL')
+        onto.save(file=output, format='owlxml')
+    # show_class(onto, 'SQL')
 
 
 if __name__ == '__main__':
