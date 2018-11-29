@@ -70,14 +70,6 @@
 \begin{document}
     \maketitle{}
 
-    \todo{%
-        TO-DO\@:
-        \begin{itemize}
-            \item Adicionar enunciado da 2ª parte (parte prática);
-            \item Escolher domínio dos exemplos.
-        \end{itemize}
-    }
-
     \section{Geral}
 
     \begin{superframe}
@@ -200,7 +192,7 @@
             fato que todo dialeto também é uma linguagem de programação, visto
             que tem um compilador próprio, não necessariamente um programa
             escrito em um dialeto compila na linguagem na qual foi baseado,
-            além de tem suas próprias especificidades. Da mesma forma, a
+            além de ter suas próprias especificidades. Da mesma forma, a
             descrição de uma linguagem de programação descreve também um
             dialeto (como uma espécie de ``dialeto-pai''). Porém, ainda assim,
             nem um nem outro são o mesmo conceito: dialetos são variações de
@@ -235,10 +227,8 @@
             \texttt{subClassOf}), cujo equivalente em FOL implica na
             necessidade de 3 variáveis para resolução (conforme demonstrado na
             Equação~\ref{transitive-fol}), o que é demonstrado ser
-            indecidível~\cite{tsarkov:2003} --- corroborado pela decisão de
-            restringir a no máximo duas variáveis consideradas
-            em~\cite{frank:2001} ---, e consequência significa que a DL de OWL
-            2 permite descrever problemas indecidíveis.
+            indecidível~\cite{tsarkov:2003}, e consequência significaria que a
+            DL de OWL 2 permite descrever problemas indecidíveis.
 
             \begin{align}
                 \label{transitive-fol}
@@ -250,12 +240,38 @@
                 unário.
             }
 
-            Não conseguimos, porém, encontrar um exemplo claro do que não é
-            possível fazer com DL e que seja com FOL\@. Toda documentação
-            descreve que DLs são fragmentos de FOL, mas nenhuma indica em que
-            ponto elas se dividem.
+            Encontrar um exemplo de assertiva expressável em FOL porém não em
+            DL foi um processo complicado, visto que voda documentação descreve
+            que DLs são fragmentos de FOL, mas nenhuma indica em que ponto elas
+            se dividem. Alguns pontos que poderiam ajudar a perceber esse ponto
+            de divisão são, por exemplo, a menção a uma categoria de DLs
+            chamada de \textit{Modal Description Logics}~\cite{frank:2001},
+            composta por DLs que incluem operadores modais, tornando possível
+            representar expressões como a~\ref{modal-customer} (pelo operador
+            modal ``eventually'').
+
+            \begin{align}
+                \label{modal-customer}
+                \text{Potential\_customer} &= \langle \text{eventually} \rangle \text{Customer}
+            \end{align}
+            \equationset{%
+                Exemplo de uso de um operador modal (\textit{``eventually''}).
+                A expressão indica que um cliente em potencial é aquele que
+                eventualmente será um cliente.
+            }
+
+            Seguindo a discussão em~\cite{emails} foi encontrada uma breve
+            explicação a respeito, o que corrobora o que foi dito
+            anteriormente: $\mathcal{ALC}$, por exemplo, é restrito a operações
+            de apenas duas variáveis, restrição que não existem em FOL\@.
+            Porém, isso parece altamente dependente de qual fragmento a uma DL
+            se trata, afinal a seção 4.2 de ~\cite{handbook} dá a entender que
+            DLs que permitem o fecho transitivo de regras englobam problemas
+            não descritíveis em FOL por conta do Teorema da Compacidade.
         \end{answer}
     \end{questions}
+
+    \clearpage{}
 
     \section{Parte 2: Prática}
     \begin{questions}
