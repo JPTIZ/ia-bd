@@ -1,0 +1,370 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://webprotege.stanford.edu/project/uz1OuMK1wyBDNcHK6amK2#"
+     xml:base="http://webprotege.stanford.edu/project/uz1OuMK1wyBDNcHK6amK2"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:webprotege="http://webprotege.stanford.edu/">
+    <owl:Ontology rdf:about="http://webprotege.stanford.edu/project/uz1OuMK1wyBDNcHK6amK2"/>
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/translates_from">
+        <rdfs:domain rdf:resource="http://webprotege.stanford.edu/Compiler"/>
+        <rdfs:range rdf:resource="http://webprotege.stanford.edu/Language"/>
+        <rdfs:label>translates_from</rdfs:label>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/translates_to">
+        <rdfs:domain rdf:resource="http://webprotege.stanford.edu/Compiler"/>
+        <rdfs:range rdf:resource="http://webprotege.stanford.edu/Language"/>
+        <rdfs:label>translates_to</rdfs:label>
+    </owl:ObjectProperty>
+
+    <!-- http://webprotege.stanford.edu/is_dialect_of -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/is_dialect_of">
+        <rdfs:domain rdf:resource="http://webprotege.stanford.edu/Dialect"/>
+        <rdfs:range rdf:resource="http://webprotege.stanford.edu/Language"/>
+        <rdfs:label>is_dialect_of</rdfs:label>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://webprotege.stanford.edu/implements -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/implements">
+        <rdfs:label>implements</rdfs:label>
+        <rdfs:domain rdf:resource="http://webprotege.stanford.edu/Implementation"/>
+        <rdfs:range rdf:resource="http://webprotege.stanford.edu/Language"/>
+    </owl:ObjectProperty>
+
+
+    <!-- http://webprotege.stanford.edu/runs_in -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/runs_in">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://webprotege.stanford.edu/Compiler"/>
+        <rdfs:range rdf:resource="http://webprotege.stanford.edu/VirtualMachine"/>
+        <rdfs:label>runs_in</rdfs:label>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://webprotege.stanford.edu/written_in -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/written_in">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://webprotege.stanford.edu/Program"/>
+        <rdfs:range rdf:resource="http://webprotege.stanford.edu/Language"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">written_in</rdfs:label>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://webprotege.stanford.edu/targets -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/targets">
+        <rdfs:label>targets</rdfs:label>
+        <rdfs:domain rdf:resource="http://webprotege.stanford.edu/DomainSpecific"/>
+        <rdfs:range rdf:resource="http://webprotege.stanford.edu/Domain"/>
+    </owl:ObjectProperty>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <!-- http://webprotege.stanford.edu/GeneralPurpose -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/GeneralPurpose">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Language"/>
+        <rdfs:label>GeneralPurpose</rdfs:label>
+
+        <owl:Restriction>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/targets"/>
+            </owl:onProperty>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:cardinality>
+        </owl:Restriction>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/Dialect -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/Dialect">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Language"/>
+        <rdfs:label>Dialect</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/Interpreter -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/Interpreter">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Program"/>
+        <rdfs:label>Interpreter</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/Implementation -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/Implementation">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:label>Implementation</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/Domain -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/Domain">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:label>Domain</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/Popular -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/Popular">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Language"/>
+        <rdfs:label>Popular</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/VirtualMachine -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/VirtualMachine">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Program"/>
+        <rdfs:label>VirtualMachine</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/Compiler -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/Compiler">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Program"/>
+        <rdfs:label>Compiler</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/Language -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/Language">
+        <rdfs:label>Language</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/Program -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/Program">
+        <rdfs:label>Program</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/DomainSpecific -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/DomainSpecific">
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Language"/>
+        <rdfs:label>DomainSpecific</rdfs:label>
+    </owl:Class>
+
+
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <!-- http://webprotege.stanford.edu/g++ -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/g++">
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/C++"/>
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/Assemblyx86"/>
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/AssemblyARM"/>
+        <webprotege:implements rdf:resource="http://webprotege.stanford.edu/C++"/>
+        <webprotege:written_in rdf:resource="http://webprotege.stanford.edu/C++"/>
+        <rdfs:label>g++</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/native-image -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/native-image">
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/Java"/>
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/JavaBytecode"/>
+        <webprotege:runs_in rdf:resource="http://webprotege.stanford.edu/GraalVM"/>
+        <webprotege:written_in rdf:resource="http://webprotege.stanford.edu/C++"/>
+        <rdfs:label>native-image</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/Databases -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/Databases">
+        <rdfs:label>Databases</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/HolyC -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/HolyC">
+        <webprotege:is_dialect_of rdf:resource="http://webprotege.stanford.edu/C"/>
+        <rdfs:label>HolyC</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/SQL -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/SQL">
+        <webprotege:targets rdf:resource="http://webprotege.stanford.edu/Databases"/>
+        <rdfs:label>SQL</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/pypy -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/pypy">
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/Python"/>
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/PythonBytecode"/>
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/Assemblyx86"/>
+        <webprotege:implements rdf:resource="http://webprotege.stanford.edu/Python"/>
+        <webprotege:runs_in rdf:resource="http://webprotege.stanford.edu/PyVM"/>
+        <webprotege:written_in rdf:resource="http://webprotege.stanford.edu/C"/>
+        <rdfs:label>pypy</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/C -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/C">
+        <rdfs:label>C</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/JVM -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/JVM">
+        <webprotege:written_in rdf:resource="http://webprotege.stanford.edu/C"/>
+        <rdfs:label>JVM</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/Python -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/Python">
+        <rdfs:label>Python</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/C++ -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/C++">
+        <rdfs:label>C++</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/mypy -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/mypy">
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/Python"/>
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/PythonBytecode"/>
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/Assemblyx86"/>
+        <webprotege:implements rdf:resource="http://webprotege.stanford.edu/Python"/>
+        <webprotege:runs_in rdf:resource="http://webprotege.stanford.edu/PyVM"/>
+        <webprotege:written_in rdf:resource="http://webprotege.stanford.edu/C"/>
+        <rdfs:label>mypy</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/Rust -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/Rust">
+        <rdfs:label>Rust</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/gcc -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/gcc">
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/C"/>
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/Assemblyx86"/>
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/AssemblyARM"/>
+        <webprotege:implements rdf:resource="http://webprotege.stanford.edu/C"/>
+        <webprotege:written_in rdf:resource="http://webprotege.stanford.edu/C"/>
+        <rdfs:label>gcc</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/GraalVM -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/GraalVM">
+        <webprotege:written_in rdf:resource="http://webprotege.stanford.edu/C++"/>
+        <rdfs:label>GraalVM</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/PyVM -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/PyVM">
+        <webprotege:written_in rdf:resource="http://webprotege.stanford.edu/C"/>
+        <rdfs:label>PyVM</rdfs:label>
+    </owl:NamedIndividual>
+
+
+
+    <!-- http://webprotege.stanford.edu/Clang -->
+
+    <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/Clang">
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/C"/>
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/C++"/>
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/Assemblyx86"/>
+        <webprotege:translates_to rdf:resource="http://webprotege.stanford.edu/AssemblyARM"/>
+        <webprotege:implements rdf:resource="http://webprotege.stanford.edu/C++"/>
+        <webprotege:written_in rdf:resource="http://webprotege.stanford.edu/C++"/>
+        <rdfs:label>Clang</rdfs:label>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.6) https://github.com/owlcs/owlapi -->
+
