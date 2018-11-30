@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://webprotege.stanford.edu/project/uz1OuMK1wyBDNcHK6amK2#"
-     xml:base="http://webprotege.stanford.edu/project/uz1OuMK1wyBDNcHK6amK2"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:webprotege="http://webprotege.stanford.edu/">
+    xml:base="http://webprotege.stanford.edu/project/uz1OuMK1wyBDNcHK6amK2"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:webprotege="http://webprotege.stanford.edu/">
     <owl:Ontology rdf:about="http://webprotege.stanford.edu/project/uz1OuMK1wyBDNcHK6amK2"/>
 
     <!--
@@ -18,12 +18,14 @@
      -->
 
     <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/translates_from">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdfs:domain rdf:resource="http://webprotege.stanford.edu/Compiler"/>
         <rdfs:range rdf:resource="http://webprotege.stanford.edu/Language"/>
         <rdfs:label>translates_from</rdfs:label>
     </owl:ObjectProperty>
 
     <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/translates_to">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdfs:domain rdf:resource="http://webprotege.stanford.edu/Compiler"/>
         <rdfs:range rdf:resource="http://webprotege.stanford.edu/Language"/>
         <rdfs:label>translates_to</rdfs:label>
@@ -32,6 +34,7 @@
     <!-- http://webprotege.stanford.edu/is_dialect_of -->
 
     <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/is_dialect_of">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdfs:domain rdf:resource="http://webprotege.stanford.edu/Dialect"/>
         <rdfs:range rdf:resource="http://webprotege.stanford.edu/Language"/>
         <rdfs:label>is_dialect_of</rdfs:label>
@@ -42,6 +45,7 @@
     <!-- http://webprotege.stanford.edu/implements -->
 
     <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/implements">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdfs:label>implements</rdfs:label>
         <rdfs:domain rdf:resource="http://webprotege.stanford.edu/Implementation"/>
         <rdfs:range rdf:resource="http://webprotege.stanford.edu/Language"/>
@@ -68,6 +72,12 @@
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">written_in</rdfs:label>
     </owl:ObjectProperty>
 
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/used_in">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <owl:inverseOf rdf:resource="http://webprotege.stanford.edu/written_in"/>
+    </owl:ObjectProperty>
+
 
 
     <!-- http://webprotege.stanford.edu/targets -->
@@ -91,15 +101,18 @@
     <!-- http://webprotege.stanford.edu/GeneralPurpose -->
 
     <owl:Class rdf:about="http://webprotege.stanford.edu/GeneralPurpose">
-        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Language"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://webprotege.stanford.edu/Language"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://webprotege.stanford.edu/targets"/>
+                        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:cardinality>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
         <rdfs:label>GeneralPurpose</rdfs:label>
-
-        <owl:Restriction>
-            <owl:onProperty>
-                <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/targets"/>
-            </owl:onProperty>
-            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:cardinality>
-        </owl:Restriction>
     </owl:Class>
 
 
@@ -118,6 +131,12 @@
     <owl:Class rdf:about="http://webprotege.stanford.edu/Interpreter">
         <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Program"/>
         <rdfs:label>Interpreter</rdfs:label>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://webprotege.stanford.edu/runs_in"/>
+                <owl:someValuesFrom rdf:resource="http://webprotege.stanford.edu/VirtualMachine"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
 
 
@@ -145,6 +164,11 @@
     <owl:Class rdf:about="http://webprotege.stanford.edu/Popular">
         <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/Language"/>
         <rdfs:label>Popular</rdfs:label>
+
+        <owl:Restriction>
+            <owl:onProperty rdf:resource="http://webprotege.stanford.edu/used_in"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+        </owl:Restriction>
     </owl:Class>
 
 
@@ -269,6 +293,7 @@
 
     <owl:NamedIndividual rdf:about="http://webprotege.stanford.edu/C">
         <rdfs:label>C</rdfs:label>
+        <webprotege:used_in rdf:resource="http://webprotege.stanford.edu/PyVM"/>
     </owl:NamedIndividual>
 
 
@@ -362,9 +387,22 @@
         <webprotege:written_in rdf:resource="http://webprotege.stanford.edu/C++"/>
         <rdfs:label>Clang</rdfs:label>
     </owl:NamedIndividual>
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://webprotege.stanford/edu/Compiler"/>
+            <rdf:Description rdf:about="http://webprotege.stanford/edu/VirtualMachine"/>
+        </owl:members>
+    </rdf:Description>
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://webprotege.stanford/edu/GeneralPurpose"/>
+            <rdf:Description rdf:about="http://webprotege.stanford/edu/DomainSpecific"/>
+        </owl:members>
+    </rdf:Description>
 </rdf:RDF>
 
-
-
 <!-- Generated by the OWL API (version 4.5.6) https://github.com/owlcs/owlapi -->
-
